@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent Lock Screen</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #lock-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('');
+            background-size: cover;
+            background-position: center;
+        }
+        #upload {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div id="lock-screen">
+        <input type="file" id="upload" accept="image/*">
+    </div>
+    <script>
+        const uploadInput = document.getElementById('upload');
+        const lockScreen = document.getElementById('lock-screen');
+
+        // Load wallpaper from localStorage
+        window.onload = function() {
+            const wallpaper = localStorage.getItem('wallpaper');
+            if (wallpaper) {
+                lockScreen.style.backgroundImage = `url('${wallpaper}')`;
+            }
+        };
+
+        // Upload wallpaper
+        uploadInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    lockScreen.style.backgroundImage = `url('${imageUrl}')`;
+                    localStorage.setItem('wallpaper', imageUrl); // Save to localStorage
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
