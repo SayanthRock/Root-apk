@@ -1,25 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view"
+    <TextView
+        android:id="@+id/brandTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="SAYANTH ROCK"
+        android:textColor="#FFFFFF"
+        android:alpha="0.5"
+        android:letterSpacing="0.3"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Click Me"
-            android:layout_margin="16dp" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/previewCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnSetWallpaper"
+        android:layout_below="@id/brandTitle"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
+        app:cardBackgroundColor="#1AFFFFFF"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#33FFFFFF"
+        app:strokeWidth="1dp">
 
+        <ImageView
+            android:id="@+id/wallpaperPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="Wallpaper Preview"
+            android:src="@drawable/minimalist_rock" />
     </com.google.android.material.card.MaterialCardView>
 
-</RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSetWallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:text="APPLY WALLPAPER"
+        android:textColor="#121212"
+        android:textSize="14sp"
+        android:letterSpacing="0.1"
+        app:backgroundTint="#FFFFFF"
+        app:cornerRadius="24dp"
+        app:elevation="4dp"
+        app:rippleColor="#E0E0E0" />
