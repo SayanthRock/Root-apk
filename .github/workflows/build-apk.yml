@@ -11,13 +11,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be0f245cb558a2fb045
 
       - name: Set up JDK 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@6a0805fcefea3d4657a314e8f6aaea4cf1f98687
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -39,7 +38,7 @@ jobs:
           gradle assembleRelease
 
       - name: Upload APK to artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@5d5d22caeed8070330713ebc532fb4a006504ad98
         with:
           name: sayanth-wallpaper-apk
           path: apps/sayanth-wallpaper/app/build/outputs/apk/release/*.apk
@@ -47,7 +46,7 @@ jobs:
 
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365d7753295e247
         with:
           files: apps/sayanth-wallpaper/app/build/outputs/apk/release/*.apk
         env:
