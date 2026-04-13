@@ -14,4 +14,4 @@ Root-apk/
 
 
 
-- [Telegram](https://t.me/@rocks0980)- 
+- [Telegram](https://t.me/sayanthrock)- 
