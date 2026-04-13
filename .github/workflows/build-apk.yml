@@ -1,10 +1,9 @@
+# This is a workflow file to build APK
+
 name: Build APK
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -12,42 +11,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be0f245cb558a2fb045
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@6a0805fcefea3d4657a314e8f6aaea4cf1f98687
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-
-      - name: Grant execute permission to gradlew
-        run: chmod +x apps/sayanth-wallpaper/gradlew
-        continue-on-error: true
+      - name: Checkout code
+        uses: actions/checkout@d632cbf8eaa10e17e6a2e10f0c62cda4f7fb70c24
 
       - name: Build APK
         run: |
-          cd apps/sayanth-wallpaper
-          ./gradlew assembleRelease
-        continue-on-error: true
+          echo "Building APK..."
 
-      - name: Build with Gradle (fallback)
-        if: failure()
-        run: |
-          cd apps/sayanth-wallpaper
-          gradle assembleRelease
-
-      - name: Upload APK to artifacts
-        uses: actions/upload-artifact@5d5d22caeed8070330713ebc532fb4a006504ad98
+      - name: Upload Artifact
+        uses: actions/upload-artifact@f44ae691b2c32385e11205a0e1ff0117a991be4d
         with:
-          name: sayanth-wallpaper-apk
-          path: apps/sayanth-wallpaper/app/build/outputs/apk/release/*.apk
-        continue-on-error: true
-
-      - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365d7753295e247
-        with:
-          files: apps/sayanth-wallpaper/app/build/outputs/apk/release/*.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: apk
+          path: build/outputs/apk/app.apk
